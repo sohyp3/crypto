@@ -108,7 +108,11 @@ class check():
         self.s = 3
         self.f = 7.5
 
-        print(f"zezo's moni : {self.grand_total_last * self.z* 0.01}$")
+        print(f"z's moni : {self.grand_total_last * self.z* 0.01}$")
+        print(f"h's moni : {self.grand_total_last * self.h* 0.01}$")
+        print(f"s's moni : {self.grand_total_last * self.s* 0.01}$")
+        print(f"f's moni : {self.grand_total_last * self.f* 0.01}$")
+        
 # ========================================
 
 
