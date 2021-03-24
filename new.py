@@ -102,9 +102,24 @@ class check():
         print(f"-------\n= {self.cleaned_total_last}$")
         print(f'Personal is {self.personal_price}$ ')
         print('\n=======')
+        
+        self.z = 13.1
+        self.h = 14
+        self.s = 3
+        self.f = 7.5
 
+        print(f"zezo's moni : {self.grand_total_last * self.z* 0.01}$")
 # ========================================
 
 
 
 check()
+
+
+# To Add: 
+# admin panel
+# - specify each inverstor's percentage 
+# - specify my personal (with drop menu for the thingie)
+# their login
+# graphlike thingie to see PnL
+# Maybe Goals for each currency 
