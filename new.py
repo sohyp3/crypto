@@ -5,6 +5,7 @@
 
 from binance.client import Client
 import secret
+import percent
 
 #api keys 
 api_key = secret.key
@@ -28,6 +29,8 @@ class check():
         self.assets_with_price = {}
         self.grand_total = 0 
         self.get_prices()
+        self.tmp1 = self.assets_with_amount
+        self.tmp2 = self.assets_with_price
 # ========================================    
         self.grand_total_last = 0
         self.assets_with_amount_last = self.assets_with_amount
@@ -71,11 +74,13 @@ class check():
         # get the personal amount 
         self.personal_to_btc = float(client.get_avg_price(symbol= f"{persoalz[0]}BTC")['price'])
         self.personal_price = float(self.btc_price * self.personal_to_btc * persoalz[1])
-        
         # cloning the dics
-        self.assets_with_amount_last[persoalz[0]] -= persoalz[1]
+        self.assets_with_amount_last[persoalz[0]] -= persoalz[1]             
         self.assets_with_price_last[persoalz[0]] -= self.personal_price
         self.grand_total_last = self.grand_total - self.personal_price
+
+
+       
 
 
 # ========================================
@@ -84,7 +89,7 @@ class check():
         #the view port 
         for item in self.assets_with_price:
             if self.assets_with_price[item] >10:
-                print(f"{item} = {self.assets_with_price[item]}$ / {self.assets_with_amount[item]} ")
+                print(f"{item} = {self.assets_with_price[item]}$ / {self.tmp1[item]} ")
                 
         self.cleaned_total = "%.2f" % self.grand_total
         print(f"-------\n= {self.cleaned_total}$")
@@ -102,20 +107,12 @@ class check():
         print(f'Personal is {self.personal_price}$ ')
         print('\n=======')
         
-        self.z_start = 600
-        self.h_start = 250
-        self.s_start = 130
-        self.f_start = 260
-        self.z = 13.1
-        self.h = 14
-        self.s = 3
-        self.f = 7.5
         
-
-        print(f"z's moni : {self.grand_total_last * self.z* 0.01}$")
-        print(f"h's moni : {self.grand_total_last * self.h* 0.01}$")
-        print(f"s's moni : {self.grand_total_last * self.s* 0.01}$")
-        print(f"f's moni : {self.grand_total_last * self.f* 0.01}$")
+    
+        print(f"{percent.Z[2]}'s moni : {self.grand_total_last * percent.Z[0]* 0.01}$ | Started with {percent.Z[1]}$")
+        print(f"{percent.H[2]}'s moni : {self.grand_total_last * percent.H[0]* 0.01}$ | Started with {percent.H[1]}$")
+        print(f"{percent.S[2]}'s moni : {self.grand_total_last * percent.S[0]* 0.01}$ | Started with {percent.S[1]}$")
+        print(f"{percent.F[2]}'s moni : {self.grand_total_last * percent.F[0]* 0.01}$ | Started with {percent.F[1]}$")
         
 # ========================================
 
