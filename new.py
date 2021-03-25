@@ -73,7 +73,6 @@ class check():
         self.personal_price = float(self.btc_price * self.personal_to_btc * persoalz[1])
         
         # cloning the dics
-
         self.assets_with_amount_last[persoalz[0]] -= persoalz[1]
         self.assets_with_price_last[persoalz[0]] -= self.personal_price
         self.grand_total_last = self.grand_total - self.personal_price
@@ -103,10 +102,15 @@ class check():
         print(f'Personal is {self.personal_price}$ ')
         print('\n=======')
         
+        self.z_start = 600
+        self.h_start = 250
+        self.s_start = 130
+        self.f_start = 260
         self.z = 13.1
         self.h = 14
         self.s = 3
         self.f = 7.5
+        
 
         print(f"z's moni : {self.grand_total_last * self.z* 0.01}$")
         print(f"h's moni : {self.grand_total_last * self.h* 0.01}$")
