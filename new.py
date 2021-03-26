@@ -78,7 +78,6 @@ class check():
         self.assets_with_price_last[persoalz[0]] -= self.personal_price
         self.grand_total_last = self.grand_total - self.personal_price
 
-
 # ========================================
 
     def clone(self):
@@ -88,7 +87,18 @@ class check():
             else:
                 self.assets_with_amount_last[item] = self.assets_with_amount[item]
                 self.assets_with_price_last[item] = self.assets_with_price[item]
-    
+        
+# ========================================
+
+    def ppl(self,x):
+        self.current_price = self.grand_total_last * x[0]* 0.01
+        self.start_price = x[1]
+        self.current_profit = self.current_price - self.start_price  
+        self.current_percentage = (self.current_profit * 100) / self.start_price
+        self.current_percentage = "%.2f" % self.current_percentage
+
+        return f"{x[2]}'s moni : {self.current_price}$ | Started with {self.start_price}$ | profit {self.current_profit} {self.current_percentage}%"
+
 # ========================================
 
     def printu(self):
@@ -110,8 +120,9 @@ class check():
         print(f"-------\n= {self.cleaned_total_last}$")
         print(f'Personal is {self.personal_price}$ ')
         print('\n=======')
-      
-      
+        # =================
+        for item in self.ppl_list:
+            print(self.ppl(item))   
 # ========================================
 
 
