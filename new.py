@@ -1,7 +1,5 @@
 # To fix 
 # 1. The pairs in line 53
-# 2. self.assets_with_prices changes value to self.assets_with_prices_last line 78
-
 
 from binance.client import Client
 import secret
@@ -29,16 +27,16 @@ class check():
         self.assets_with_price = {}
         self.grand_total = 0 
         self.get_prices()
-        self.tmp1 = self.assets_with_amount
-        self.tmp2 = self.assets_with_price
-# ========================================    
+# ========================================  
+        self.assets_with_amount_last = {}
+        self.assets_with_price_last = {}
+        self.clone()  
+# ======================================== 
         self.grand_total_last = 0
-        self.assets_with_amount_last = self.assets_with_amount
-        self.assets_with_price_last = self.assets_with_price
         self.calculate()
 # ========================================
+        self.ppl_list = [percent.H,percent.Z,percent.F,percent.S,percent.M]
         self.printu()
-
 
 # ========================================
 
@@ -74,46 +72,46 @@ class check():
         # get the personal amount 
         self.personal_to_btc = float(client.get_avg_price(symbol= f"{persoalz[0]}BTC")['price'])
         self.personal_price = float(self.btc_price * self.personal_to_btc * persoalz[1])
+
         # cloning the dics
         self.assets_with_amount_last[persoalz[0]] -= persoalz[1]             
         self.assets_with_price_last[persoalz[0]] -= self.personal_price
         self.grand_total_last = self.grand_total - self.personal_price
 
 
-       
+# ========================================
 
-
+    def clone(self):
+        for item in self.asset_list:  
+            if item == 'BTC' or item == 'USDT' or item == 'TRY':
+                pass
+            else:
+                self.assets_with_amount_last[item] = self.assets_with_amount[item]
+                self.assets_with_price_last[item] = self.assets_with_price[item]
+    
 # ========================================
 
     def printu(self):
         #the view port 
         for item in self.assets_with_price:
             if self.assets_with_price[item] >10:
-                print(f"{item} = {self.assets_with_price[item]}$ / {self.tmp1[item]} ")
+                print(f"{item} = {self.assets_with_price[item]}$ / {self.assets_with_amount[item]} ")
                 
         self.cleaned_total = "%.2f" % self.grand_total
         print(f"-------\n= {self.cleaned_total}$")
-        print('\n\n\n=======')
-
-        # =================
-        
+        print('\n\n\n=======')       
+        # ================= 
         print("After Removing Personal")
-        for item2 in self.assets_with_price_last:
-            if self.assets_with_price_last[item2] >10:
-                print(f"{item2} = {self.assets_with_price_last[item2]}$ / {self.assets_with_amount_last[item2]} ")
+        for item in self.assets_with_price_last:
+            if self.assets_with_price_last[item] >10:
+                print(f"{item} = {self.assets_with_price_last[item]}$ / {self.assets_with_amount_last[item]} ")
 
         self.cleaned_total_last = "%.2f" % self.grand_total_last
         print(f"-------\n= {self.cleaned_total_last}$")
         print(f'Personal is {self.personal_price}$ ')
         print('\n=======')
-        
-        
-    
-        print(f"{percent.Z[2]}'s moni : {self.grand_total_last * percent.Z[0]* 0.01}$ | Started with {percent.Z[1]}$")
-        print(f"{percent.H[2]}'s moni : {self.grand_total_last * percent.H[0]* 0.01}$ | Started with {percent.H[1]}$")
-        print(f"{percent.S[2]}'s moni : {self.grand_total_last * percent.S[0]* 0.01}$ | Started with {percent.S[1]}$")
-        print(f"{percent.F[2]}'s moni : {self.grand_total_last * percent.F[0]* 0.01}$ | Started with {percent.F[1]}$")
-        
+      
+      
 # ========================================
 
 
